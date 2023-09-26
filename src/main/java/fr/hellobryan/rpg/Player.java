@@ -25,7 +25,7 @@ public class Player extends Entity{
         speed = 4;
         direction = "down";
     }
-    public BufferedImage LoadPlayerImage(){
+    public BufferedImage loadPlayerImage(){
         try{
             return ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/%s/%s%s.png".formatted(action, action, direction + spriteNum)));
         }catch (IOException e){
@@ -72,7 +72,7 @@ public class Player extends Entity{
     }
     public void draw(Graphics2D g2){
 
-        g2.drawImage(LoadPlayerImage(), x, y, gp.getTileSize() * gp.getScale() , gp.getTileSize()* gp.getScale(), null);
+        g2.drawImage(loadPlayerImage(), x, y, gp.getTileSize() * gp.getScale() , gp.getTileSize()* gp.getScale(), null);
     }
 
 }
