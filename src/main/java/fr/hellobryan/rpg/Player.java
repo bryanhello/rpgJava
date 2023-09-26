@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.security.Key;
 
 @Slf4j
 public class Player extends Entity{
@@ -17,7 +18,7 @@ public class Player extends Entity{
         this.gp = gp;
         this.KeyH = KeyH;
         setDefaultValues();
-        getPlayerImage();
+
     }
     public void setDefaultValues(){
         x = 0;
@@ -25,23 +26,18 @@ public class Player extends Entity{
         speed = 4;
         direction = "down";
     }
-    public void getPlayerImage(){
+    public BufferedImage LoadPlayerImage(){
         try{
-            IdleDown1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleUp1.png"));
-            IdleDown2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleUp2.png"));
-            IdleUp1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleDown1.png"));
-            IdleUp2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleDown2.png"));
-            IdleLeft1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleLeft1.png"));
-            IdleLeft2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleLeft2.png"));
-            IdleRight1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleRight1.png"));
-            IdleRight2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/idle/idleRight2.png"));
+            return ImageIO.read(getClass().getClassLoader().getResourceAsStream("player/%s/%s%s.png".formatted(action, action, direction + spriteNum)));
         }catch (IOException e){
-            log.error("",e);
+            return null;
         }
     }
+
     public void update(){
+
         if(KeyH.Pressed){
-            moving = true;
+            action = "walking";
             if(KeyH.upPressed){
                 direction = "up";
                 y -= speed;
@@ -69,32 +65,15 @@ public class Player extends Entity{
                 spriteCounter = 0;
             }
         }else{
-            moving = false;
+            action = "idle";
             spriteNum = 1;
             spriteCounter = 0;
         }
 
     }
     public void draw(Graphics2D g2){
-        BufferedImage image = null;
-        image = switch (spriteNum) {
-            case 1 -> switch (direction) {
-                case "up" -> IdleUp1;
-                case "down" -> IdleDown1;
-                case "left" -> IdleLeft1;
-                case "right" -> IdleRight1;
-                default -> image;
-            };
-            case 2 -> switch (direction) {
-                case "up" -> IdleUp2;
-                case "down" -> IdleDown2;
-                case "left" -> IdleLeft2;
-                case "right" -> IdleRight2;
-                default -> image;
-            };
-            default -> null;
-        };
-        g2.drawImage(image, x, y, gp.getTileSize() * gp.getScale() , gp.getTileSize()* gp.getScale(), null);
+
+        g2.drawImage(LoadPlayerImage(), x, y, gp.getTileSize() * gp.getScale() , gp.getTileSize()* gp.getScale(), null);
     }
 
 }
