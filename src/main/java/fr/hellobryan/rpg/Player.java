@@ -37,26 +37,25 @@ public class Player extends Entity{
 
         if(KeyH.Pressed){
             action = "walking";
-            if(KeyH.upPressed){
-                direction = "up";
-                y -= speed;
-            }
-            if(KeyH.downPressed){
-                direction = "down";
-                y += speed;
-            }
-            if(KeyH.leftPressed){
-                direction = "left";
-                x -= speed;
-            }
-            if(KeyH.rightPressed){
-                direction = "right";
-                x += speed;
-            }
-
         }else{
             action = "idle";
+        }
 
+        if(KeyH.upPressed){
+            direction = "up";
+            y -= speed;
+        }
+        if(KeyH.downPressed){
+            direction = "down";
+            y += speed;
+        }
+        if(KeyH.leftPressed){
+            direction = "left";
+            x -= speed;
+        }
+        if(KeyH.rightPressed){
+            direction = "right";
+            x += speed;
         }
         if(spriteCounter == 10 + gp.getFPS()* 0.5){
             if(spriteNum == 1){
