@@ -1,0 +1,15 @@
+plugins {
+    id "java"
+    id("io.freefair.lombok") version "8.3"
+}
+
+group 'fr.hellobryan'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.4.11'
+}

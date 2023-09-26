@@ -1,4 +1,4 @@
-package main;
+package fr.hellobryan.rpg;
 import javax.swing.JFrame;
 public class Main{
     public static void main(String[] args) {

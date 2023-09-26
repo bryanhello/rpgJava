@@ -1,23 +1,27 @@
-package main;
+package fr.hellobryan.rpg;
+
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
-
+@Getter
+@Slf4j
 public class GamePanel extends JPanel implements Runnable{
 
-    final int originalTileSize = 32;
-    final int scale = 2;
+    private final int originalTileSize = 32;
+    private final int scale = 2;
 
-    public final int tileSize = originalTileSize * scale;
-    final int maxScreenCol = 20;
-    final int maxScreenRow = 20;
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
-    final int FPS = 144;
-    KeyHandler keyHandler = new KeyHandler();
-    Thread gameThread;
-    Player player = new Player(this, keyHandler);
-    
+    private final int tileSize = originalTileSize * scale;
+    private final int maxScreenCol = 20;
+    private final int maxScreenRow = 20;
+    private final int screenWidth = tileSize * maxScreenCol;
+    private final int screenHeight = tileSize * maxScreenRow;
+    private final int FPS = 144;
+    private final KeyHandler keyHandler = new KeyHandler();
+    private Thread gameThread;
+    private final Player player = new Player(this, keyHandler);
+
 
     public GamePanel(){
 
@@ -53,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable{
                 drawCount++;
             }
             if(timer >= 1000000000){
-                System.out.println("FPS: " + drawCount);
+                log.info("FPS: {}", drawCount);
                 drawCount = 0;
                 timer = 0;
             }
