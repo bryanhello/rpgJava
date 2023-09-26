@@ -53,21 +53,22 @@ public class Player extends Entity{
                 direction = "right";
                 x += speed;
             }
-            spriteCounter++;
-            if(spriteCounter == 10 + gp.getFPS()* 0.5){
-                if(spriteNum == 1){
-                    spriteNum = 2;
-                }
-                else{
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }
+
         }else{
             action = "idle";
-            spriteNum = 1;
+
+        }
+        if(spriteCounter == 10 + gp.getFPS()* 0.5){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            }
+            else{
+                spriteNum = 1;
+            }
             spriteCounter = 0;
         }
+        spriteCounter++;
+
 
     }
     public void draw(Graphics2D g2){

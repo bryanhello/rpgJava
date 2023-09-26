@@ -28,12 +28,13 @@ public class KeyHandler implements KeyListener {
         if(code == KeyEvent.VK_D){
             rightPressed = true;
         }
+
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
-        Pressed = false;
+
         if(code == KeyEvent.VK_Z){
             upPressed = false;
         }
@@ -45,6 +46,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D){
             rightPressed = false;
+        }
+        if(!upPressed && !downPressed && !leftPressed && !rightPressed){
+            Pressed = false;
         }
     }
 
